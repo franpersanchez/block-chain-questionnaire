@@ -1,5 +1,6 @@
 package com.example.questionnaire.blockchainquestionnaire;
 
+//import com.example.questionnaire.blockchainquestionnaire.Entities.Choices;
 import com.example.questionnaire.blockchainquestionnaire.Entities.Questions;
 import com.example.questionnaire.blockchainquestionnaire.Entities.Users;
 import com.example.questionnaire.blockchainquestionnaire.Repositories.AnswersRepository;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.HashSet;
 
 @Component
 public class DataLoader implements ApplicationRunner {
@@ -33,8 +36,10 @@ public class DataLoader implements ApplicationRunner {
         usersService.createNewAccount(new Users("Fran", "Perez Sanchez","fsfsaf@gmail.com"));
         usersService.createNewAccount(new Users("Tomas", "Lageira","tomaswhatever@gmail.com"));
 
-        questionsService.createNewQuestion((new Questions("How big is your company?")));
+      questionsService.createNewQuestion((new Questions("How big is your House?")));
+
         answersService.createNewAnswer("100", 2L,1L);
+        answersService.createNewAnswer("really big", 2L,2L);
 
 
 

@@ -1,12 +1,14 @@
 package com.example.questionnaire.blockchainquestionnaire.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Questions {
@@ -19,20 +21,30 @@ public class Questions {
     private String question;
 
     @OneToMany
-    @JsonManagedReference
+    @JsonIgnore
     @JoinColumn(name = "questions_id")
     private List<Answers> answers = new ArrayList<>();
+
+    @OneToOne(mappedBy="questions")
+    private Choices choices;
+
 
 
     public Questions() {
     }
+
     public Questions(String question){
-            this.question=question;
+
+        this.question=question;
+        this.choices=choices;
     }
 
-    public Questions(String question, List<Answers> answers) {
-        this.question = question;
-        this.answers = answers;
+    public Choices getChoices() {
+        return choices;
+    }
+
+    public void setChoices(Choices choices) {
+        this.choices = choices;
     }
 
     public Long getId() {

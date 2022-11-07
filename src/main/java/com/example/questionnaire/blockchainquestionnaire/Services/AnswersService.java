@@ -9,6 +9,7 @@ import com.example.questionnaire.blockchainquestionnaire.Repositories.UsersRepos
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,9 +24,15 @@ public class AnswersService {
     private QuestionsRepository questionsRepository;
 
     public Answers createNewAnswer(String newAnswer,Long user_id, Long question_id){
-        Optional<Users> userFound = usersRepository.findById(user_id);
-        Optional<Questions> questionRelated = questionsRepository.findById(question_id);
-        Answers answer = new Answers(newAnswer,questionRelated.get(), userFound.get());
+        Users userFound = usersRepository.findById(user_id).isPresent()?usersRepository.findById(user_id).get():null;
+        Questions questionRelated = questionsRepository.findById(question_id).isPresent()?questionsRepository.findById(question_id).get():null;
+        Answers answer = new Answers(newAnswer,questionRelated, userFound);
+
         return answersRepository.save(answer);
+    }
+
+    public List<Answers> getAnswersFromUser(Long user_id) {
+
+        return answersRepository.findAllByUserId(user_id);
     }
 }

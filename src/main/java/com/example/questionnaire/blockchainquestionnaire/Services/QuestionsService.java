@@ -6,6 +6,8 @@ import com.example.questionnaire.blockchainquestionnaire.Repositories.QuestionsR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class QuestionsService {
 
@@ -14,6 +16,12 @@ public class QuestionsService {
 
     public Questions createNewQuestion(Questions newQuestion) {
         return questionsRepository.save(newQuestion);
+    }
+
+    public List<Questions> getAllQuestions(){
+
+        return questionsRepository.findAll()
+                ;
     }
 }
 
