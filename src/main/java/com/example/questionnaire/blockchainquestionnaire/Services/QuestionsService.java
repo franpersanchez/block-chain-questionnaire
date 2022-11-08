@@ -15,6 +15,7 @@ public class QuestionsService {
     private QuestionsRepository questionsRepository;
 
     public Questions createNewQuestion(Questions newQuestion) {
+
         return questionsRepository.save(newQuestion);
     }
 

@@ -7,7 +7,7 @@ import com.example.questionnaire.blockchainquestionnaire.Repositories.QuestionsR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import java.util.List;
 
 @Service
 public class ChoicesService {
@@ -34,4 +34,7 @@ public class ChoicesService {
     }
 
 
+    public List<Choices> getAllChoices() {
+        return choicesRepository.findAll();
+    }
 }

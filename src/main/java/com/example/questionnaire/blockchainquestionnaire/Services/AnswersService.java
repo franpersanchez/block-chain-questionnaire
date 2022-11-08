@@ -23,16 +23,24 @@ public class AnswersService {
     @Autowired
     private QuestionsRepository questionsRepository;
 
-    public Answers createNewAnswer(String newAnswer,Long user_id, Long question_id){
+    public void insertNewAnswer(String[] answers,Long user_id){
         Users userFound = usersRepository.findById(user_id).isPresent()?usersRepository.findById(user_id).get():null;
-        Questions questionRelated = questionsRepository.findById(question_id).isPresent()?questionsRepository.findById(question_id).get():null;
-        Answers answer = new Answers(newAnswer,questionRelated, userFound);
 
-        return answersRepository.save(answer);
-    }
+        for(int iq=1; iq<answers.length+1;iq++) {
+                Questions questionRelated = questionsRepository.findById((long) iq).isPresent() ? questionsRepository.findById((long) iq).get() : null;
+                answersRepository.save(new Answers(answers[iq-1], questionRelated, userFound));
+
+        }
+          }
+
+
+
+
 
     public List<Answers> getAnswersFromUser(Long user_id) {
 
         return answersRepository.findAllByUserId(user_id);
     }
+
+
 }
